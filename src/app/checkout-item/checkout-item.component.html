@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+  <thead>
+    <th>Room</th>
+    <th>Quantity</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of checkoutItems">
+      <td><app-room [room]="item.room" [showForm]="false"></app-room></td>
+      <td>{{ item.quantity }}</td>
+      <td [innerText]="item.room.price * item.quantity"></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,48 +1,69 @@
-<div class="card">
+<div class="card" *appUnless="saved">
   <div class="card-header">Registration</div>
   <div class="card-body">
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" 
-        [(ngModel)]="firstName" placeholder="Enter First Name">
+      <input type="text" class="form-control" id="firstName" name="firstName" #firstName=ngModel
+        [(ngModel)]="onlineUser.firstName" placeholder="Enter First Name" required>
+      <!-- here css states can use .touch .untouch, .dirty .valid .invalid .pristine-->
+      <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+        First Name is required
+      </div>
     </div>
     <div class="form-group">
       <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" name="lastName"
-        [(ngModel)]="lastName" placeholder="Enter Last Name">
+      <input type="text" class="form-control" id="lastName" name="lastName" #lastName=ngModel
+        [(ngModel)]="onlineUser.lastName" placeholder="Enter Last Name" required>
+      <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+        Last Name is required
+      </div>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="text" class="form-control" id="email" name="email"
-        [(ngModel)]="email" placeholder="Enter Email">
+      <input type="email" class="form-control" id="email" name="email" #email=ngModel
+        [(ngModel)]="onlineUser.email" placeholder="Enter Email" required>
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Email is required
+      </div>
     </div>
     <div class="form-group">
-      <label for="password">First Name</label>
-      <input type="password" class="form-control" id="password" name="password"
-        [(ngModel)]="password" placeholder="Enter Password">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" #password=ngModel
+        [(ngModel)]="onlineUser.password" placeholder="Enter Password" required>
+      <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+        Password is required
+      </div>
     </div>
     <div class="form-group">
-      <button class="btn btn-success">Save</button>
+      <button class="btn btn-success" (click)="doSave()">Save</button>
     </div>
-    <div>
-      <table class="table table-bordered">
-        <tr>
-          <td>First Name:</td>
-          <td>{{ firstName }}</td>
-        </tr>
-        <tr>
-          <td>Last Name:</td>
-          <td>{{ lastName }}</td>
-        </tr>
-        <tr>
-          <td>Email:</td>
-          <td>{{ email }}</td>
-        </tr>
-        <tr>
-          <td>Password:</td>
-          <td>{{ password }}</td>
-        </tr>
-      </table>
+  </div>
+</div>
+
+<div class="card" *ngIf="saved">
+  <div class="card-body">
+    <h6>Saved successfully!</h6>
+    <br>
+    <table class="table table-bordered">
+      <tr>
+        <td>First Name:</td>
+        <td>{{ onlineUser.firstName }}</td>
+      </tr>
+      <tr>
+        <td>Last Name:</td>
+        <td>{{ onlineUser.lastName }}</td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>{{ onlineUser.email }}</td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td>{{ onlineUser.password }}</td>
+      </tr>
+    </table>
+    <div class="form-group">
+      <button class="btn btn-success" (click)="goBack()">Back</button>
     </div>
   </div>
 </div>

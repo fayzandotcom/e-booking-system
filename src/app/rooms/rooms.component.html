@@ -5,21 +5,13 @@
 <div class="row">{{ message }}</div>
 <div class="row">
   <div class="col-md-4" *ngFor="let room of displayRooms">
-    <div class="card">
-      <img class="card-img-top" [src]="room.photo">
-      <div class="card-body">
-          <h4>{{ room.roomType }}</h4>
-          <h6 [style.color]="(room.price < 150) ? 'green' : (room.price < 200) ? 'blue' : 'purple'" >Price: {{ room.price }}</h6>
-          <h6 [class.less-quantity]="room.quantity<5">Quantity: {{ room.quantity }}</h6>
-          <input type="text" size="1" maxlength="1" #selectedQty>&nbsp;
-          <button class="btn btn-primary" [disabled]="room.quantity<5"
-            (click)="this.addToCart(room, selectedQty.value)">Add</button>
-      </div>
-    </div>
+    <app-room [room]="room" [showForm]="true" (notify)="addToCart($event)"></app-room>
     <br>
   </div>
 </div>
-
+<div *ngIf="this.checkoutItems.length > 0">
+  <app-checkout-item [checkoutItems] ="checkoutItems"></app-checkout-item>
+</div>
 <!-- 
   Example of modifying html attribute.
   using [attr.colspan] will re-render the element to change the attribute value.

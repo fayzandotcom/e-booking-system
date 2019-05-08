@@ -1,0 +1,14 @@
+<div class="card">
+  <img class="card-img-top" [src]="room.photo">
+  <div class="card-body">
+      <h4>{{ room.roomType }}</h4>
+      <h6 [style.color]="(room.price < 150) ? 'green' : (room.price < 200) ? 'blue' : 'purple'" >
+        Price: {{ room.price | currency:'Rs. ' }}</h6>
+      <div *ngIf="showForm">
+        <h6 [class.less-quantity]="room.quantity<5">Quantity: {{ room.quantity }}</h6>
+        <input type="text" size="1" maxlength="1" #selectedQty>&nbsp;
+        <button class="btn btn-primary" [disabled]="room.quantity<5"
+          (click)="this.addToCart(room, selectedQty.value)">Add</button>
+      </div>
+  </div>
+</div>

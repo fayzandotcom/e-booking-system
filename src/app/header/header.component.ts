@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  appTitle:string
+  appTitle:string;
+  formatRules:any = {
+    prefix:"<| ",
+    suffix:" |>",
+    times: 1
+  };
 
   constructor() { 
-    this.appTitle = "e-Booking System"
+    this.appTitle = "E-Booking System";
   }
 
   ngOnInit() {

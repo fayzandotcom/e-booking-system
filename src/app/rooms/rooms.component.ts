@@ -22,8 +22,10 @@ export class RoomsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.rooms = this.roomService.getRooms();
-    this.displayRooms = this.rooms;
+    this.roomService.getRooms().subscribe(data => {
+      this.rooms = data;
+      this.displayRooms = this.rooms;
+    })
   }
 
   addToCart(item:CheckoutItem) {
